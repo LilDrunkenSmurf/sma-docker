@@ -1,4 +1,4 @@
-FROM alpine
+FROM ubuntu:latest
 
 # set version label
 ARG BUILD_DATE
