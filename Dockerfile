@@ -10,6 +10,7 @@ LABEL maintainer="LilDrunkenSmurf"
 ARG DEBIAN_FRONTEND="noninteractive"
 ENV XDG_CONFIG_HOME="/config/xdg"
 ENV SMA_PATH /usr/local/sma
+ENV MEDIA_PATH /data
 ENV SMA_UPDATE false
 ENV SMA_FFMPEG_URL https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz
 
