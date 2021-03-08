@@ -1,4 +1,4 @@
-FROM jrottenberg/ffmpeg
+FROM jrottenberg/ffmpeg:snapshot-ubuntu
 LABEL maintainer="LilDrunkenSmurf"
 
 # set environment variables
