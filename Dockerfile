@@ -39,4 +39,5 @@ RUN echo "#!/usr/bin/env \n python3 $SMA_PATH/manual.py -i $MEDIA_PATH -a" > ./e
 RUN chmod +x ./entrypoint.sh
 
 # run command script
-CMD [ "./entrypoint.sh" ]
+ENTRYPOINT ["/bin/bash"]
+CMD ["./entrypoint.sh"]
