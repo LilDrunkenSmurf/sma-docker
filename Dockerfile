@@ -1,14 +1,7 @@
-FROM ubuntu:latest
-
-# set version label
-ARG BUILD_DATE
-ARG VERSION
-LABEL build_version="SMA-Manual version:- ${VERSION} Build-date:- ${BUILD_DATE}"
+FROM python:slim
 LABEL maintainer="LilDrunkenSmurf"
 
 # set environment variables
-ARG DEBIAN_FRONTEND="noninteractive"
-ENV XDG_CONFIG_HOME="/config/xdg"
 ENV SMA_PATH /usr/local/sma
 ENV MEDIA_PATH /data
 ENV SMA_UPDATE false
@@ -20,17 +13,14 @@ RUN \
   apt-get install -y \
     git \
     wget \
-    python3 \
-    python3-pip && \
+    apt-utils && \
 # make directory
   mkdir ${SMA_PATH} && \
 # download repo
   git clone https://github.com/mdhiggins/sickbeard_mp4_automator.git ${SMA_PATH} && \
 # install pip, venv, and set up a virtual self contained python environment
-  python3 -m pip install --user --upgrade pip && \
-  python3 -m pip install --user virtualenv && \
-  python3 -m virtualenv ${SMA_PATH}/venv && \
-  ${SMA_PATH}/venv/bin/pip install -r ${SMA_PATH}/setup/requirements.txt && \
+  python3 -m pip install --upgrade pip && \
+  pip install -r ${SMA_PATH}/setup/requirements.txt && \
 # ffmpeg
   wget ${SMA_FFMPEG_URL} -O /tmp/ffmpeg.tar.xz && \
   tar -xJf /tmp/ffmpeg.tar.xz -C /usr/local/bin --strip-components 1 && \
@@ -48,6 +38,7 @@ RUN \
 
 # ports and volumes
 VOLUME /config
+VOLUME /data
 VOLUME /usr/local/sma/config
 
 # update.py sets FFMPEG/FFPROBE paths, updates API key and Sonarr/Radarr settings in autoProcess.ini
@@ -55,7 +46,7 @@ COPY extras/ ${SMA_PATH}/
 COPY root/ /
 
 # Build a shell script because the ENTRYPOINT command doesn't like using ENV
-RUN echo "#!/bin/bash \n ${SMA_PATH}/manual.sh" > ./entrypoint.sh
+COPY ./entrypoint.sh ./entrypoint.sh
 RUN chmod +x ./entrypoint.sh
 
 # run command script
