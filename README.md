@@ -1,0 +1,7 @@
+# SMA Conversion, in a self-container docker container.
+Run mdhiggins SMA within a docker container, with python pre-installed, using default options.
+
+[Sickbeard_mp4_automator](https://github.com/mdhiggins/sickbeard_mp4_automator)
+
+Usage:
+`docker run --rm -v /media/folder/location:/data sma-docker:latest`
