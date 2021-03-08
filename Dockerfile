@@ -54,5 +54,9 @@ VOLUME /usr/local/sma/config
 COPY extras/ ${SMA_PATH}/
 COPY root/ /
 
+# Build a shell script because the ENTRYPOINT command doesn't like using ENV
+RUN echo "#!/bin/bash \n ${SMA_PATH}/manual.sh" > ./entrypoint.sh
+RUN chmod +x ./entrypoint.sh
+
 # run command script
-ENTRYPOINT [ "${SMA_PATH}/manual.sh" ]
+ENTRYPOINT [ "./entrypoint.sh" ]
