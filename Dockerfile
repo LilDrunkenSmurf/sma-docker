@@ -16,7 +16,8 @@ RUN \
   mkdir ${SMA_PATH} && \
 # download repo
   git clone https://github.com/mdhiggins/sickbeard_mp4_automator.git ${SMA_PATH} && \
-  cp ${SMA_PATH}/setup/autoProcess.ini.sample ${SMA_PATH}/config/autoProcess.ini && \
+# remove exe from sample autoProcess
+  sed 's/.exe//g' $SMA_PATH/setup/autoProcess.ini.sample && \
 # install pip
   python3 -m pip install --upgrade pip && \
   pip install -r ${SMA_PATH}/setup/requirements.txt && \
