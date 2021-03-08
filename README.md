@@ -6,4 +6,4 @@ Run mdhiggins SMA within a docker container, with python pre-installed, using de
 Usage:
 `docker run --rm -v /media/folder/location:/data sma-docker:latest`
 
-Docker image based on [jrottenberg/ffmpeg](https://hub.docker.com/r/jrottenberg/ffmpeg/) using the `ubuntu-snapshot` tag.
+Docker image based on [jrottenberg/ffmpeg](https://hub.docker.com/r/jrottenberg/ffmpeg/) using the `snapshot-ubuntu` tag.
