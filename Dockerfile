@@ -35,7 +35,7 @@ VOLUME /data
 VOLUME /usr/local/sma/config
 
 # Build a shell script because the ENTRYPOINT command doesn't like using ENV
-RUN echo "#!/bin/bash \n python3 $SMA_PATH/manual.py -i $MEDIA_PATH -a" > ./entrypoint.sh
+RUN echo "#!/usr/bin/env \n python3 $SMA_PATH/manual.py -i $MEDIA_PATH -a" > ./entrypoint.sh
 RUN chmod +x ./entrypoint.sh
 
 # run command script
