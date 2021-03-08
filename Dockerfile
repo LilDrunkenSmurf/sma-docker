@@ -18,7 +18,8 @@ RUN \
   mkdir ${SMA_PATH} && \
 # download repo
   git clone https://github.com/mdhiggins/sickbeard_mp4_automator.git ${SMA_PATH} && \
-# install pip, venv, and set up a virtual self contained python environment
+  cp ${SMA_PATH}/setup/autoProcess.ini.sample ${SMA_PATH}/config/autoProcess.ini && \
+# install pip
   python3 -m pip install --upgrade pip && \
   pip install -r ${SMA_PATH}/setup/requirements.txt && \
 # ffmpeg
