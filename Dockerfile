@@ -4,14 +4,12 @@ LABEL maintainer="LilDrunkenSmurf"
 # set environment variables
 ENV SMA_PATH /usr/local/sma
 ENV MEDIA_PATH /data
-ENV SMA_UPDATE false
 
 # get python3 and git, and install python libraries
 RUN \
   apt-get update && \
   apt-get install -y \
     git \
-    wget \
     python3 \
     python3-pip && \
 # make directory
@@ -34,10 +32,6 @@ RUN \
 VOLUME /config
 VOLUME /data
 VOLUME /usr/local/sma/config
-
-# manual.sh calls the manual command
-COPY extras/ ${SMA_PATH}/
-COPY root/ /
 
 # Build a shell script because the ENTRYPOINT command doesn't like using ENV
 RUN echo "#!/bin/bash \n python3 $SMA_PATH/manual.py -i $MEDIA_PATH -a" > ./entrypoint.sh
